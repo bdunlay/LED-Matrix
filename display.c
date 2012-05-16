@@ -29,7 +29,7 @@ void refresh() {
 void printd(byte data[]) {
 	int i = 0;
 	for (i = 0; i < 8; i++) {
-		currentData[i] = data[i];
+		currentData[i] = ~data[i]; // invert so that 0s will sink current
 	}
 }
 
