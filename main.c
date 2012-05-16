@@ -32,7 +32,8 @@ typedef unsigned char byte;
 #define DISPLAY_WIDTH	8
 
 #define PRESCALE	8
-#define TIMER_CT	(F_CPU/PRESCALE)/1000 - 1 // 1 mS count
+#define TARGET_F	1000
+#define TIMER_CT	((F_CPU/PRESCALE)/TARGET_F - 1) // 1ms Refresh period
 
 enum shiftRegisters{
 	DATA,
@@ -88,7 +89,7 @@ void writeShift(byte data, int width, int t) {
 
 
 
-// this will be on an interrupt timer
+// this will be on an interrupt timer every 10 ms
 void refresh() {
 	int i;
 	int select = 0x01;
@@ -103,7 +104,7 @@ void refresh() {
 		// perpetuate the 
 		if (select) select = 0x00;
 		
-		_delay_ms(1);
+		//_delay_ms(1);
 	}
 	
 	writeShift(select, 1, SELECT);
