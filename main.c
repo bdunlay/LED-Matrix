@@ -13,7 +13,7 @@
 
 int main()
 {
-
+	// set a default image to the display
 	char smiley[] = {0x00, 0x04, 0x42, 0x02, 0x02, 0x42, 0x04, 0x00};
 	setFrame(smiley);
 
@@ -21,10 +21,10 @@ int main()
 	initializeShift();
 
 	// initialize interrupts and timer0
-    sei();
-    timer8_enable_int();
-    timer8_init(REFRESH_CYCLE_COUNT, CLOCK_SCALE_256);
-    timer8_start();
+	sei();
+	timer8_enable_int();
+	timer8_init(REFRESH_CYCLE_COUNT, CLOCK_SCALE_256);
+	timer8_start();
 
 	while(1);
 }
