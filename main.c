@@ -3,7 +3,6 @@
  * LED Matrix Controller for the ATtiny2313a
  */
  
-#include <avr/io.h>
 #include "shift.h"
 
 int main()

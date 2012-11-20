@@ -48,27 +48,26 @@ void resetShiftRegisters()
 void print(char frame[]) 
 {
 	int i;
-	int columnBit;
+	int columnSelect;
 
 	for (i = 0; i < 8; i++)	
 	{
 		if (i == 0) 
 		{
-			columnBit = 0x01;
+			columnSelect = 0x01;
 		}
 		else
 		{
-			columnBit = 0x00;
+			columnSelect = 0x00;
 		}
 
 		// select column
-		shiftBit(PB6, PB4, PB7, ~columnBit);
+		shiftBit(PB6, PB4, PB7, ~columnSelect);
 		// print column
 		shiftByte(PB2, PB0, PB3, frame[i]);
 		// clear column
 		shiftByte(PB2, PB0, PB3, 0x00);
 	 }
-
 }
 
 /*
