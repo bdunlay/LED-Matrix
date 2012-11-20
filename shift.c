@@ -3,11 +3,7 @@
  * Shift functions for LED Matrix for the ATtiny2313a
  * Some code borrowed / reworked from http://bildr.org/2011/02/74hc595/
  */
-
-#ifndef SHIFT_H
-#define SHIFT_H
-#endif
-
+ 
 #include "shift.h"
 #include <avr/io.h>
 #include <util/delay.h>
