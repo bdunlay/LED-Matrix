@@ -7,9 +7,23 @@
 #include "timer8.h"
 #include "types.h"
 #include "frame.h"
+#include "usart.h"
 #include <avr/interrupt.h>
 
 #define REFRESH_CYCLE_COUNT 65 // 60.0961538 hertz
+
+
+/*
+ *
+ * THE FRAME RATE IS BASED ON A 1 MHZ CLOCK
+ *
+ * THE UART IS BASED ON AN 8 MHZ CLOCK
+ *
+ * THEY NEED TO BE BROUGHT UP TO THE SAME SPEED
+ */
+
+
+
 
 int main()
 {
@@ -32,4 +46,8 @@ int main()
 /* Timer IRQ handler */
 ISR(TIMER0_COMPA_vect) {
 	print(getFrame());
+}
+
+ISR(USART0_vect) {
+	char btye = USARTReadChar();
 }
