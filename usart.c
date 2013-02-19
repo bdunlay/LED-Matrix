@@ -5,6 +5,7 @@
 //UBRR_VALUE is defined as F_CPU/(16*baud) - 1 = 8000000/(16*38400) - 1
 #define UBRR_VALUE 12 
 
+
 //void USARTInit(uint16_t ubrr_value)
 void USARTInit()
 {
@@ -29,4 +30,14 @@ char USARTReadChar()
    // busy wait for data
    // while(!(UCSRA & (1<<RXC)));
    return UDR;
+}
+
+void USARTSendChar(char* data, int length)
+{
+   // get pointer to the head of the LL
+   // gotta verify all of the pointer logic
+   int i;
+   for (i = 0; i < length; i++) {
+
+   }
 }
