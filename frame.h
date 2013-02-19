@@ -3,6 +3,7 @@
 
 char* getFrame();
 void setFrame(char* data);
+void setFrameLine(char data, int lineNumber);
 
 #endif
 

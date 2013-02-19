@@ -9,27 +9,35 @@
 //void USARTInit(uint16_t ubrr_value)
 void USARTInit()
 {
-   // Set Baud rate
-   UBRR = UBRR_VALUE;
+  /* Set baud rate */
+  UBRRH = (unsigned char)(UBRR_VALUE>>8);
+  UBRRL = (unsigned char)UBRR_VALUE;
+  /* Enable receiver and transmitter */
+  UCSRB = (1<<RXEN)|(1<<TXEN)|(1<<RXCIE);
+  /* Set frame format: 8data, 2stop bit */
+  UCSRC = (1<<UCSZ1)|(1<<UCSZ0);
 
-   /* Set Frame Format
-    * Asynchronous mode
-    * No Parity
-    * 1 StopBit
-    * char size 8
-    */
+   // // Set Baud rate
+   // UBRRL |= UBRR_VALUE;
 
-   UCSRC=(1<<URSEL)|(3<<UCSZ0);
+   //  Set Frame Format
+   //  * Asynchronous mode
+   //  * No Parity
+   //  * 1 StopBit
+   //  * char size 8
+    
 
-   // Enable The receiver and transmitter and interrupts
-   UCSRB=(1<<RXEN)|(1<<TXEN)|(1<<RXCIE);
+   // UCSRC=(1<<UCSZ0)|(1<<UCSZ1);
+
+   // // Enable The receiver and transmitter and interrupts
+   //UCSRB=(1<<RXEN)|(1<<TXEN)|(1<<RXCIE);
 }
 
-char USARTReadChar()
+unsigned char USARTReadChar()
 {
    // busy wait for data
    // while(!(UCSRA & (1<<RXC)));
-   return UDR;
+   return (unsigned char) UDR;
 }
 
 void USARTSendChar(char* data, int length)

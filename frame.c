@@ -20,3 +20,9 @@ void setFrame(char* data)
 		frame[i] = data[i];
 	}
 }
+
+void setFrameLine(char data, int lineNumber){
+
+	frame[lineNumber] = data;
+
+}
