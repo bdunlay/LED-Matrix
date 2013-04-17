@@ -58,6 +58,10 @@ DWORD timer16_get_count(void) {
 	return TCNT1;
 }
 
+void timer16_set_count(DWORD count) {
+    TCNT1 = count;
+}
+
 void timer16_enable_int(void) {
     bit_set(TIMSK, OCIE1A);
 }

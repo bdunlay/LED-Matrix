@@ -12,6 +12,7 @@
 #include <util/delay.h>
 
 #define REFRESH_CYCLE_COUNT 60 // 60.0961538 hertz
+#define SERIAL_TIMEOUT 2000 // time to send byte is ~1666 cycles @ 8MHz, give some leeway for the timeout
 
 
 
@@ -38,6 +39,10 @@ int main()
 	timer8_init(REFRESH_CYCLE_COUNT, CLOCK_SCALE_1024);
 	timer8_start();
 
+    // initialize interrupts and timer1 for serial line timeout
+    timer16_enable_int();
+    timer16_init(SERIAL_TIMEOUT, CLOCK_SCALE_1);
+
 	// so we can see what's happening
 	setFrame(full);
 
@@ -59,7 +64,20 @@ ISR(TIMER0_COMPA_vect) {
 }
 
 ISR(USART_RX_vect) {
+    // if it's receiving the first byte, start the timeout
+    if (line == 0)
+        timer16_start();
+    else if (line == 7)
+        timer16_stop(); // stop the timeout if it's the last bit
+    else
+        timer16_set_count(0); // otherwise reset the countdown
 	unsigned char byte = (unsigned char) UDR;
 	setFrameLine(byte, line++);
 	line = line % 8;
 }
+
+ISR(TIMER1_COMPA_vect) {
+    timer16_stop();
+    line = 0;
+}
+
