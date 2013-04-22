@@ -18,6 +18,7 @@ BYTE timer16_is_running(void);
 void timer16_clear_flag(void);
 DWORD timer16_get_count(void);
 void timer16_set_count(DWORD);
+void timer16_set_count(DWORD);
 void timer16_enable_int(void);
 void timer16_disable_int(void);
 

@@ -5,6 +5,7 @@
  
 #include "shift.h"
 #include "timer8.h"
+#include "timer16.h"
 #include "types.h"
 #include "frame.h"
 #include "usart.h"
